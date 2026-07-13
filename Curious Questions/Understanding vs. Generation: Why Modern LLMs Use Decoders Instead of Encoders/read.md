@@ -1,4 +1,4 @@
-# Understanding vs. Generation: Why Modern LLMs Use Decoders Instead of Encoders
+# Understanding vs. Generation: Why Modern LLMs Use Decoders Instead of Encoders ?
 
 This is probably the biggest confusion people have.
 
@@ -97,12 +97,53 @@ Because BERT can see the **entire sentence**, it builds a much richer understand
 
 ✅ Perfect for:
 
-- Semantic Search
 - Text Classification
 - Sentiment Analysis
 - Named Entity Recognition
 - Embeddings
 - Question Answering
+
+---
+
+### Let's Take a Question Answering Example
+
+Suppose we ask:
+
+**Question**
+
+```text
+Where was Albert Einstein born?
+```
+
+**Passage**
+
+```text
+Albert Einstein was born in Ulm, Germany in 1879.
+```
+
+BERT reads the **question and passage together**.
+
+Different attention heads learn different relationships:
+
+* **Head 1** → *Who?* → **Albert Einstein**
+* **Head 2** → *Where?* → **Ulm**
+* **Head 3** → *When?* → **1879**
+
+Instead of generating a new answer, BERT predicts the **start** and **end** positions of the answer in the passage.
+
+```text
+Albert Einstein was born in Ulm, Germany in 1879.
+                             ↑
+                        Start & End
+```
+
+Answer:
+
+```text
+Ulm
+```
+
+**BERT understands first, then extracts the answer—it doesn't generate it.**
 
 ---
 
@@ -121,8 +162,6 @@ The model starts generating:
 ```text
 Neural
 ```
-
-↓
 
 ```text
 Networks
